@@ -39,8 +39,8 @@ const config = {
     // 'react-mdl/extra/material.min.js',
     // Load base style
     'normalize.css',
-    './public/style/fonts.sass',
-    './public/style/main.sass',
+    './styles/fonts.sass',
+    './styles/main.sass',
     /* The main entry point of your JavaScript application */
     './main.js',
   ],
@@ -163,6 +163,10 @@ const config = {
         ],
       },
     ],
+  },
+  sassLoader: {
+    includePaths: [bourbon],    
+    data: sassVars.join('\n')
   },
 
   // The list of plugins for PostCSS
