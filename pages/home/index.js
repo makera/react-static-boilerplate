@@ -10,7 +10,7 @@
 
 import React, { PropTypes } from 'react';
 import Layout from '../../components/Layout';
-import s from './styles.css';
+import s from './styles.sass';
 import { title, html } from './index.md';
 
 class HomePage extends React.Component {

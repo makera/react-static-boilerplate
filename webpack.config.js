@@ -14,6 +14,8 @@ const path = require('path');
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
 const pkg = require('./package.json');
+const bourbon = require('node-bourbon').includePaths;
+const sassVars = require('./styles/').vars;
 
 const isDebug = global.DEBUG === false ? false : !process.argv.includes('--release');
 const isVerbose = process.argv.includes('--verbose') || process.argv.includes('-v');
@@ -33,8 +35,12 @@ const config = {
   // The entry point for the bundle
   entry: [
     /* Material Design Lite (https://getmdl.io) */
-    '!!style!css!react-mdl/extra/material.min.css',
-    'react-mdl/extra/material.min.js',
+    // '!!style!css!react-mdl/extra/material.min.css',
+    // 'react-mdl/extra/material.min.js',
+    // Load base style
+    'normalize.css',
+    './public/style/fonts.sass',
+    './public/style/main.sass',
     /* The main entry point of your JavaScript application */
     './main.js',
   ],
@@ -141,6 +147,20 @@ const config = {
       {
         test: /\.(eot|ttf|wav|mp3)$/,
         loader: 'file-loader',
+      },    
+      {
+        test: /\.(sass)$/,
+        loaders: [
+          'style-loader',
+          `css-loader?${JSON.stringify({ 
+            sourceMap: false, 
+            minimize: true,
+            localIdentName: isDebug ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]', 
+            modules: false,
+          })}`,
+          'postcss-loader',
+          'sass-loader?sourceMap'
+        ],
       },
     ],
   },
