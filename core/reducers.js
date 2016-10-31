@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import rest from './rest';
 
 
 const routes = (state = {}, action) => {
@@ -12,6 +13,6 @@ const routes = (state = {}, action) => {
 
 const reducers = Object.assign({
   routes
-})
+}, rest.reducers);
 
 export default reducers;
