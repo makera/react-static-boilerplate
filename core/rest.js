@@ -11,7 +11,9 @@ const rest = reduxApi({
   }
 });
 rest.use("fetch", adapterFetch(fetch));
-// rest.use("rootUrl", "http://localhost:8000"); 
+if (process.env.NODE_ENV == 'development') {
+  rest.use("rootUrl", "http://localhost:8000"); 
+}
 // it's necessary to point using REST backend
 
 export default rest;
